@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Añadir una ventana emergente personalizada | Despliega tu mapa</title>
+		<link rel="shortcut icon" href="../images/desploy-your-map.svg" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/prism.css">	
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+		<script src="../js/prism.js"></script>
+		<style>
+		#map {
+			width: 960px;
+			height: 500px;
+		}
+		body {
+			padding: 0 25px 25px 25px;
+			font-size: 18px;
+		}
+		.custom .leaflet-popup-tip,
+		.custom .leaflet-popup-content-wrapper {
+			background: #e60000;
+			color: #ffffff;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Añadir una ventana emergente personalizada</h1>
+
+		<div id="map"></div>
+
+		<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;title&gt;Añadir una ventana emergente personalizada&lt;/title&gt;
+
+&lt;!-- Se referencia la hoja de estilos de JavaScript --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.css&quot; /&gt;
+
+&lt;!-- Se referencia el archivo JavaScript de Leaflet --&gt;
+&lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Se establecen los estilos de ancho y alto del contenedor del mapa --&gt;
+&lt;style&gt;
+
+#map {
+	width: 960px;
+	height:500px;
+}
+
+/* Personalización de estilos predeterminados de Leaflet */
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+	background: #e60000;
+	color: #ffffff;
+}
+
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+	&lt;!-- Se crea el elemento contenedor del mapa --&gt;
+	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+	// Se crea un objeto mapa, se le asigna al elemento contenedor &#39;map&#39; y se fijan su punto central y nivel de zum iniciales
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	// Se añaden al objeto mapa las teselas de mapa a partir de OpenStreetMap y la información correspondiente de atribución 
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	// Se crea un icono personalizado
+	var photoIcon = L.icon({
+		iconUrl: '../images/photo.svg',
+		iconSize: [38, 95], // tamaño del icono
+		popupAnchor: [0,-15] // posición relativa de la ventana emergente
+		});
+
+	// Se crea el contenido personalizado de la ventana emergente
+	var customPopup = &quot;&lt;img src=&#39;../images/malaga-city-hall.jpg&#39; alt=&#39;Ayuntamiento de Málaga&#39; width=&#39;200px&#39;/&gt;&lt;br/&gt;Ayuntamiento de Málaga. Fuente: Wikimedia Commons, imagen de Daniel Capilla (CC BY-SA 2.0).&quot;;
+
+	// Se especifican las opciones de la ventana emergente 
+	var customOptions = {
+		&#39;maxWidth&#39;: &#39;200&#39;,
+		&#39;className&#39; : &#39;custom&#39;
+		}
+	 
+	// Se crea un objeto marcador, se establece la opción de icono personalizado, se vincula una ventana emergente con contenido y opciones pesonalizadas y se añade al mapa en las coordenadas indicadas
+	var marker = L.marker([36.7204,-4.4150], {icon: photoIcon}).bindPopup(customPopup, customOptions).addTo(map);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+		<div class="nav">
+		<hr/>
+		<p align="right"><a href="../index.html#add-a-custom-popup">Volver al tutorial</a></p>
+		</div>
+
+	<script>
+		var map = L.map('map').setView([36.722, -4.420], 15);
+
+		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: 'Datos &copy; <a href="http://www.openstreetmap.org/copyright" target="blanck">' + 'Colaboradores de OpenStreetMap</a> (<a href="http://www.openstreetmap.org/copyright" target="blanck">ODbL</a>) | Teselas <a href="https://github.com/gravitystorm/openstreetmap-carto" target="blanck">OSM Carto</a> &copy; Randy Allan y otros colaboradores (<a href="https://creativecommons.org/licenses/by-sa/2.0/deed.es" target="blanck">CC BY-SA 2.0</a>)'
+		}).addTo(map);
+		var photoIcon = L.icon({
+			iconUrl: '../images/photo.svg',
+			iconSize: [38, 95],
+			popupAnchor: [0,-15]
+		});
+		var customPopup = "<img src='../images/malaga-city-hall.jpg' alt='Ayuntamiento de Málaga'' width='200px'/><br/>Ayuntamiento de Málaga. Fuente: Wikimedia Commons, imagen de Daniel Capilla (CC BY-SA 2.0).";
+
+		var customOptions = {
+			maxWidth: '200',
+			className: 'custom'
+		};
+
+		var marker = L.marker([36.7204,-4.4150], {icon: photoIcon}).bindPopup(customPopup, customOptions).addTo(map);
+	</script>
+</body>
+</html>

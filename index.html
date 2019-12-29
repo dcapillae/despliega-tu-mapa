@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+	<title>Despliega tu mapa</title>
+	<link rel="shortcut icon" href="images/desploy-your-map.svg" type="image/x-icon" />
+	<link rel="stylesheet" href="css/site.css" />
+	<link rel="stylesheet" href="css/prism.css">	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="js/prism.js"></script>
+	<meta charset="utf-8">
+
+</head>
+
+<body>
+
+	<header>
+	<div id="header_map">
+	<h1>Despliega tu mapa<h1>
+	<h2>Tutorial básico de Leaflet</h2>
+	</div>
+	</header>
+
+	<nav>
+	<p class="small">
+	<a href="#desploy-a-basic-map">Desplegar un mapa básico</a> |
+	<a href="#desploy-a-multilayer-basic-map">Desplegar un mapa básico multicapa</a> |
+	<a href="#add-a-standard-marker">Añadir un marcador estándar</a> | 
+	<a href="#add-a-custom-marker">Añadir un marcador personalizado</a> | 
+	<a href="#add-a-standard-popup">Añadir una ventana emergente estándar</a> | 
+	<a href="#add-a-custom-popup">Añadir una ventana emergente personalizada</a> |
+	<a href="#add-geometric-shapes">Añadir formas geométricas</a>
+	</nav>
+
+	<div class="section" id="intro">
+		<p>Tutorial dirigido a personas sin experiencia en programación que desean hacer uso de la <a href="http://leafletjs.com" target="blanck">biblioteca JavaScript de Leaflet</a> para desplegar sus propios mapas.</p>
+		<p>Para seguir el tutorial solo necesitarás un ordenador, un navegador web y un editor de texto simple. Usaremos los lenguajes de programación <a href="https://es.wikipedia.org/wiki/HTML" target="blanck">HTML</a>, <a href="https://es.wikipedia.org/wiki/CSS" target="blanck">CSS</a> y <a href="https://es.wikipedia.org/wiki/JavaScript" target="blanck">JavaScript</a> (JavaScript de Leaflet).</p>
+		<p>Los contenidos se estructuran en base a una serie de ejemplos prácticos que proporcionan todo el código necesario. Incluyen además unas explicaciones mínimas sobre cada nuevo fragmento de código introducido respecto a ejemplos anteriores, por lo que no deberías tener especiales dificultades para poder seguirlos, reproducirlos o adaptarlos a tus necesidades.</p>
+		<p>Los ejemplos propuestos podrán ampliarse o modificarse eventualmente en el futuro. Está previsto incluir al menos un par de ejemplos más sobre cómo crear capas que muestren datos vectoriales o como añadir capas de datos al mapa partir de archivos externos. Consulta el <a href="https://github.com/dcapillae/desploy-your-map" target="blanck">repositorio del tutorial en GitHub</a> para más detalles.</p>
+	</div>
+
+	<div class="section" id="desploy-a-basic-map">
+		<h2>Desplegar un mapa básico</h2>
+		<p>Este primer ejemplo muestra cómo desplegar un mapa básico como el que se muestra a continuación.</p>
+		<p class="small" align="right"><em><a href="examples/desploy-a-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></a></em></p>
+		<div id="basic_map" class="map"></div>
+
+		<p>Para desplegar un mapa como éste, vamos a necesitar lo siguiente:</li>
+		<ol>
+			<li>Crear un documento HTML donde publicar el mapa</li>
+			<li>Referenciar la hoja de estilos y el archivo JavaScript de Leaflet</li>
+			<li>Definir un elemento contenedor para el mapa en nuestra página web</li>
+			<li>Escribir unas pocas líneas de código JavaScript para desplegar el mapa</li>
+		</ol>
+
+	<div class="section">
+		<h3>1. Creación de un documento HTML</h3>
+		<p>Abre tu editor de texto y crea un documento nuevo con extensión &quot;html&quot;. Añade al documento el siguiente código de marcado con la estructura mínima de una página web:</p>
+
+		<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;title&gt;Desplegar un mapa básico&lt;/title&gt;
+
+&lt;style&gt;
+
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+		</code></pre>
+	</div>
+
+	<div class="section">
+		<h3>2. Referenciar los archivos de estilos y JavaScript de Leaflet</h3>
+		<p>Nuestro documento HTML está vacío. Vamos a empezar a rellenarlo introduciendo las referencias a la hoja de estilos y el archivo JavaScript de Leaflet. Las referencias a estos archivos son indispensables para poder desplegar un mapa interactivo en nuestra página.</p>
+		<p>Podemos hacer uso del sitio web oficial de Leaflet para referenciar estos archivos o descargar una copia de los mismos y guardarlos en nuestro equipo para referenciarlos localmente. En este ejemplo haremos uso de los archivos alojados en el sitio web de Leaflet.</p>
+		<p>Para referenciar la hoja de estilo y el archivo JavaScript de Leaflet, introduce el siguiente código en la sección &lt;head&gt; del documento HTML:</p>
+		<pre><code class="language-markup">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css&quot; /&gt;
+
+&lt;script src=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js&quot;&gt;&lt;/script&gt;
+		</code></pre>
+	</div>
+
+	<div class="section">
+		<h3>3. Añadir un contenedor del mapa y establecer sus estilos</h3>
+		<p>Leaflet necesita que definamos un elemento &lt;div&gt; en nuestro documento HTML donde colocar el mapa, y que ese elemento &lt;div&gt; tenga una altura fija establecida. Este elemento &lt;div&gt; será nuestro contenedor del mapa.</p>
+		<p>Crearemos un elemento &lt;div&gt; y lo identificaremos como &quot;map&quot; para definir nuestro contenedor. Para ello, añade lo siguiente en la sección &lt;body&gt; del documento HTML:</p>
+		<pre><code class="language-markup">
+&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+		</code></pre>
+		<p>Ahora vamos a establecer los estilos de nuestro contenedor haciendo uso del lenguaje CSS. Fijaremos su anchura en 960 píxeles y su altura en 500 píxeles de alto. Añade lo siguiente entre las etiquetas &lt;style&gt; de la sección &lt;head&gt; del documento HTML:</p>
+		<pre><code class="language-markup">
+#map {
+width: 960px;
+height: 500px;
+}
+		</code></pre>
+		<p>Ya hemos configurado un contenedor para el mapa y hemos establecido sus estilos. Ahora vamos a escribir algo de código JavaScript para desplegar un mapa web interactivo que colocaremos en el contenedor recién definido.</p>
+	</div>
+	
+	<div class="section">
+		<h3>4. Inicializar el mapa</h3>
+		<p>La secuencia de comandos que escribiremos a continuación permite solicitar a un proveedor de teselas el juego de teselas que deseamos mostrar en nuestro mapa, así como establecer los valores iniciales del mismo.</p>
+		<p>Introduce el siguiente código JavaScript entre las etiquetas &lt;script&gt; del documento HTML:</p>
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+&lt;/script&gt;
+
+</code></pre>
+		<p>En primer lugar, el código crea una variable 'map' a la que asigna un objeto mapa mediante la función <a href="http://leafletjs.com/reference.html#map-constructor" target="blanck">L.map</a> e identifica el elemento &lt;div&gt; que contendrá dicho mapa (en nuestro caso, el elemento &lt;div&gt; identificado como 'map'). Luego configura algunas opciones que sirven para ajustar el punto central y el nivel de zum iniciales del mapa.</p>
+		<p>En segundo lugar, el código crea un nuevo objeto (una capa de teselas) mediante la función <a href="http://leafletjs.com/reference.html#tilelayer" target="blanck">L.tileLayer</a>, especificando el juego de teselas a cargar y proporcionando la correspondiente información de atribución a través de la opción 'attribution'. En nuestro caso, hemos usado teselas de <a href="http://www.openstreetmap.org" target="blanck">OpenStreetMap</a>, aunque hay muchos otros <a href="https://leaflet-extras.github.io/leaflet-providers/preview/index.html" target="blanck">proveedores de teselas libres</a> que puedes utilizar. Prueba con un juego de teselas diferente y no olvides proporcionar siempre la correspondiente información de atribución, tanto de los datos del mapa como de las teselas de imágenes.
+		<p>Por último, el código emplea el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a> para añadir la capa de teselas al mapa identificado por la variable 'map'.
+		<p>Nuestro ejemplo ya está completo. Hemos creado un documento HTML, referenciado los archivos de Leaflet, añadido un contenedor para el mapa, definido los estilos del contenedor e inicializado el mapa. El contenido del archivo HTML definitivo debería aparecer tal que así:</p>
+
+		<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;title&gt;Desplegar un mapa básico&lt;/title&gt;
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css&quot; /&gt;
+
+&lt;script src=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js&quot;&gt;&lt;/script&gt;
+
+&lt;style&gt;
+#map {
+	width: 960px;
+	height:500px;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+		<p>Comprueba que tu código esté bien escrito, guarda el documento HTML y ábrelo con un navegador web. Deberías poder ver un mapa centrado en la ciudad de Málaga. Deslízate por él y prueba a ampliar o reducir la vista. ¡Enhorabuena! Acabas de desplegar tu primer mapa web interactivo usando la biblioteca JavaScript de Leaflet.</p>
+	</div>
+
+	<div class="section" id="desploy-a-multilayer-basic-map">
+		<h2>Desplegar un mapa básico multicapa</h2>
+		<p>Este ejemplo muestra cómo desplegar un <a href="#desploy-a-basic-map">mapa básico</a> multicapa. Un mapa básico multicapa permite seleccionar de forma interactiva el juego de teselas que deseamos mostrar en cada momento a partir de las capas de teselas disponibles.</p>
+		<p class="small" align="right"><em><a href="examples/desploy-a-multilayer-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+		
+		<div id="mlb_map" class="map"></div>
+		
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var osmcarto = L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+			attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+		}),
+		osmhumanitarian = L.tileLayer(&#39;http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png&#39;, {
+			attribution: &#39;Datos \u00a9 &lt;a href=&quot;http://www.openstreetmap.org&quot;&gt;&#39; +
+			&#39;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot;&gt;ODbL&lt;/a&gt;) | Teselas \u00a9 &lt;a href=&quot;https://github.com/hotosm/HDM-CartoCSS&quot;&gt;Humanitarian HDM CartoCSS&lt;/a&gt; (&lt;a href=&quot;https://github.com/hotosm/HDM-CartoCSS/blob/master/LICENCE.txt&quot; target=&quot;blanck&quot;&gt;CC0 1.0&lt;/a&gt;)&#39;
+		}),
+		pnoa = L.tileLayer.wms(&quot;http://www.ign.es/wms-inspire/pnoa-ma?SERVICE=WMS&&quot;, {
+			layers: &quot;OI.OrthoimageCoverage&quot;,
+			transparent: true,
+			format: &#39;image/jpeg&#39;,
+			version: &#39;1.3.0&#39;,//versión según el proveedor del servicio
+			attribution: &#39;Ortofotos &lt;a href=&quot;http://www.scne.es/productos.html#OrtoPNOA&quot; target=&quot;blanck&quot;&gt;PNOA&lt;/a&gt; \u00a9 &lt;a href=&quot;http://www.ign.es&quot; target=&quot;blanck&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt; (&lt;a href=&quot;https://creativecommons.org/licenses/by/4.0/legalcode.es&quot; target=&quot;blanck&quot;&gt;CC BY 4.0&lt;/a&gt;)&#39;
+		});
+
+	var map = L.map(&#39;map&#39;, {
+		center: [36.722, -4.420],
+		zoom: 15,
+		layers: [osmcarto]
+	});
+
+	var baseLayers = {
+		&quot;Callejero (OSM)&quot;: osmcarto,
+		&quot;Humanitario (OSM)&quot;: osmhumanitarian,
+		&quot;Ortofotos (IGN)&quot;: pnoa
+	};
+
+	L.control.layers(baseLayers).addTo(map);
+
+&lt;/script&gt;
+</pre></code>
+		<p>El código crea tres capas de teselas, 'osmcarto', 'osmhumanitarian' y 'pnoa', las dos primeras mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#tilelayer" target="blanck">L.tilelayer()</a> y la tercera mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#tilelayer-wms" target="blanck">L.tilelayer.wms()</a>, que permite crear una capa de teselas a partir de un servicio WMS. Se consigna la información de atribución correspondiente a cada capa y algunas opciones adicionales facilitadas por el proveedor WMS.
+		<p>Se crea un objeto mapa y se asigna al contenedor 'map', estableciendo su punto central y nivel de zum iniciales, así como la capa de teselas a mostrar de forma predeterminada, la capa 'osmcarto'. A continuación se identifican las capas base (capas mutuamente excluyentes) creando la variable 'baseLayers'. También es posible agrupar varias capas o mostrar capas superpuestas (no excluyentes): para saber más, consulta <a href="https://leafletjs.com/examples/layers-control/" target="blanck">este ejemplo</a> en la página de Leaflet.</p>
+		<p>Por último, se crea un control de capas mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#control-layers-l-control-layers" target="blanck">L.control.layers</a>, tomando como opción la variable 'baseLayers', y se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
+	</div>
+	
+	<div class="section" id="add-a-standard-marker">
+		<h2>Añadir un marcador estándar</h2>
+		<p>Este ejemplo añade un marcador estándar a nuestro <a href="#desploy-a-basic-map">mapa básico</a>.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-standard-marker.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+		<div id="sm_map" class="map"></div>
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var marker = L.marker([36.7204,-4.4150]).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+		<p>El código crea una variable 'marker' a la que asigna un objeto marcador mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#marker" target="blanck">L.marker()</a>, que toma como valores las coordenadas geográficas del punto. El marcador se añade al mapa con el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
+		<p>Ten en cuenta que puedes añadir uno o más marcadores al mapa siguiendo este mismo procedimiento. Prueba a añadir un segundo marcador creando una segunda variable 'marker2', por ejemplo, y sitúanlo en otra posicón del mapa para ver el resultado.</p>
+	</div>
+
+	<div class="section" id="add-a-custom-marker">
+		<h2>Añadir un marcador personalizado</h2>
+		<p>Este ejemplo añade un marcador personalizado al <a href="#desploy-a-basic-map">mapa básico</a>. El marcador personalizado será un icono de nuestra elección.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-custom-marker.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="cm_map" class="map"></div>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var photoIcon = L.icon({
+		iconUrl: '../images/photo.svg',
+		iconSize: [38, 95],
+		});
+	 
+	var marker = L.marker([36.7204,-4.4150], {icon: photoIcon}).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+
+		<p>El código crea una variable 'photoIcon' y le asigna como valor un icono mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#icon" target="blanck">L.icon()</a>, especificando las siguientes opciones del mismo:
+		<ul>
+			<li>iconUrl: la dirección URL de la imagen que usaremos como icono</li>
+			<li>iconSize: el tamaño del icono</li>
+		</ul>
+		<p>La variable ‘photoIcon’ se emplea luego en la opción ‘icon’ de la función <a href="https://leafletjs.com/reference-1.6.0.html#marker" target="blanck">L.marker()</a> para añadir un marcador con nuestro icono personalizado al mapa.</p>
+		</div>
+
+	<div class="section" id="add-a-standard-popup">
+		<h2>Añadir una ventana emergente estándar</h2>
+		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> una ventana emergente estándar vinculada a un marcador personalizado. La ventana aparece al hacer clic sobre el marcador.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-standard-popup.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="sp_map" class="map"></div>
+		
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var photoIcon = L.icon({
+		iconUrl: '../images/photo.svg'',
+		iconSize: [38, 95],
+		});
+
+	L.marker([36.7204,-4.4150], {icon: photoIcon}).bindPopup('Ayuntamiento de Málaga').addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+
+		<p>El código hace aparecer una ventana emergente al hacer clic sobre el marcador usando el método <a href="https://leafletjs.com/reference-1.6.0.html#marker-bindpopup" target="blanck">bindPopup()</a>. Una alternativa al código anterior sería:</p>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.720, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var photoIcon = L.icon({
+		iconUrl: '../images/photo.svg',
+		iconSize: [38, 95], // tamaño del icono
+		});
+	 
+	var marker = L.marker([36.7204,-4.4150], {icon: photoIcon}).addTo(map);
+
+	marker.bindPopup('Ayuntamiento de Málaga');
+
+&lt;/script&gt;
+</code></pre>		
+
+	<div class="section" id="add-a-custom-popup">
+		<h2>Añadir una ventana emergente personalizada</h2>
+		<p>Este ejemplo añade al contenido HTML junto con algunos estilos adicionales a una ventana emergente vinculada a un marcador personalizado sobre un <a href="#desploy-a-basic-map">mapa básico</a>. La ventana aparece al hacer clic sobre el marcador.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-custom-popup.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="cp_map" class="map"></div>
+		
+		<pre><code class="language-markup">
+&lt;style&gt;
+#map {
+	width: 960px;
+	height:500px;
+}
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+	background: #e60000;
+	color: #ffffff;
+}
+&lt;/style&gt;
+</code></pre>
+		<p>Este código CSS se añade a la sección &lt;head&gt; del archivo HTML y sirve para definir el estilo de la clase 'custom' que usaremos posteriormente en nuestro código.</p>
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var photoIcon = L.icon({
+		iconUrl: '../images/photo.svg',
+		iconSize: [38, 95], // tamaño del icono
+		popupAnchor: [0,-15] // posición relativa de la ventana emergente
+		});
+
+	var customPopup = &quot;&lt;img src=&#39;../images/malaga-city-hall.jpg&#39; alt=&#39;Ayuntamiento de Málaga&#39; width=&#39;200px&#39;/&gt;&lt;br/&gt;Ayuntamiento de Málaga. Fuente: Wikimedia Commons, imagen de Daniel Capilla (CC BY-SA 2.0).&quot;;
+
+	var customOptions = {
+		&#39;maxWidth&#39;: &#39;200&#39;,
+		&#39;className&#39; : &#39;custom&#39;
+		}
+	 
+	var marker = L.marker([36.7204,-4.4150], {icon: photoIcon}).bindPopup(customPopup, customOptions).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+
+		<p>En primer lugar, el código añade una opción <a href="https://leafletjs.com/reference-1.6.0.html#icon-popupanchor" target="blanck">'popupAnchor'</a> al icono. Esta opción permite establecer unos valores relativos de desplazamiento de la ventana emergente respecto del punto en el que se encuentra el marcador de manera tal que el icono del marcador resulte más visible.</p>
+		<p>Luego se crea la variable ‘customPopup’ y se le asigna algo de contenido HTML.</p>
+		<p>A continuación se crea la variable ‘customOptions’ y se configuran unas cuantas opciones, como el ancho máximo de la ventana emergente ('maxWidth') y sus estilos, asignando el nombre de clase 'custom' para que se apliquen a la ventana los estilos CSS personalizados de esa clase.
+		<p>Ten en cuenta que el ancho máximo predeterminado de una ventana emergente es de 300 píxeles. Si el contenido de tu ventana emergente desborda ese ancho, asegúrate de asignarle un valor adecuado cambiando la opción 'maxWidth' para adaptar el ancho al contenido.</p>
+		<p>Finalmente, el código emplea el método <a href="https://leafletjs.com/reference-1.6.0.html#marker-bindpopup" target="blanck">bindPopup</a> para vincular la ventana emergente al marcador, tomando como argumentos el contenido HTML y las opciones antes definidas. También las variables creadas previamente se consignan según este método.</p>
+	</div>
+
+	<div class="section" id="add-geometric-shapes">
+		<h2>Añadir formas geométricas</h2>
+		<p>Los siguientes ejemplos muestran como añadir algunas formas geométricas al <a href="#desploy-a-basic-map">mapa básico</a>. Aprenderemos a añadir un <a href="#add-a-circle">círculo</a>, un <a href="#add-a-rectangle">rectángulo</a>, un <a href="#add-a-polygon">polígono</a> y una <a href="#add-a-polyline">polilínea</a>.</p>
+
+		<div class="section" id="add-a-circle">
+		<h3>Añadir un círculo</h3>
+		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un círculo a partir de su centro y su radio.</p>
+
+		<p class="small" align="right"><em><a href="examples/add-a-circle.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+		
+		<div id="circle_map" class="map"></div>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	L.circle([36.722, -4.420], 300,{color:&#39;blue&#39;, opacity:1, fillColor: &#39;blue&#39;, fillOpacity:.4}).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+		<p>El código hace uso de la función <a href="https://leafletjs.com/reference-1.6.0.html#circle" target="blanck">L.circle()</a> para crear un círculo a partir de su centro y su radio, además de ajustar otras opciones de estilo, como el color del borde, el color de relleno o sus respectivas opacidades. El círculo se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p> 
+		</div>
+
+		<div class="section" id="add-a-rectangle">
+		<h3>Añadir un rectángulo</h3>
+		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un rectángulo a partir de dos de sus vértices.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-rectangle.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="rectangle_map" class="map"></div>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var bounds = [[36.725, -4.425], [36.720, -4.415]];
+
+	L.rectangle(bounds, {color: "purple", weight: 2}).addTo(map);
+
+&lt;/script&gt;
+
+</code></pre>
+		<p>El código define una variable 'bounds' con los puntos que delimitan las dimensiones del rectángulo, sus vértices superior izquierdo e inferior derecho. El código hace uso de la función <a href="https://leafletjs.com/reference-1.6.0.html#rectangle" target="blanck">L.rectangle()</a> para crear el rectángulo y ajusta además otras opciones de estilo, como el color del mismo o el ancho de su borde. Finalmente, lo añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p> 
+		</div>
+
+		<div class="section" id="add-a-polygon">
+		<h3>Añadir un polígono</h3>
+		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un polígno a partir de la posición de sus vértices.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-polygon.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="polygon_map" class="map"></div>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var area = [[36.728, -4.425],[36.718, -4.425],[36.722, -4.415]];
+
+	L.polygon(area,{color:'green',opacity:.6}).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+		<p>El código define una variable 'area' con los vértices del polígono. Esta variable se utiliza después en la función <a href="https://leafletjs.com/reference-1.6.0.html#polygon" target="blanck">L.polygon()</a> para crear el polígono, ajustando además otras opciones de estilo, como el color del mismo o su opacidad. El polígono se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p> 
+		</div>
+
+		<div class="section" id="add-a-polyline">
+		<h3>Añadir una polilínea</h3>
+		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> una polilínea a partir de los puntos que definen su trazado.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-polyline.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+
+		<div id="polyline_map" class="map"></div>
+
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	var track = [[36.7205, -4.4130],[36.7165, -4.4260],[36.7218, -4.4250],[36.7230, -4.4240],[36.7240, -4.4220],[36.7250, -4.4220],[36.7270, -4.4240],[36.7270, -4.4250],[36.7270, -4.4270],[36.7280, -4.4300]];
+
+	L.polyline(track,{color:'red',opacity:1}).addTo(map);
+
+&lt;/script&gt;
+</code></pre>
+		<p>El código define una variable 'track' con los puntos que determinan el trazado de la polilínea. Esta variable se utiliza después en la función <a href="https://leafletjs.com/reference-1.6.0.html#polyline" target="blanck">L.polyline()</a> para crear la polilínea, ajustando además otras opciones de estilo, como el color de la misma o su opacidad. La polilínea se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p> 
+		</div>
+	<div class="nav">
+	<p align="right"><a href="#">Volver al principio</a></p>
+	</div>
+
+	<footer>
+		<hr/>
+		<p class="small">Fecha de primera publicación: 2019-12-29</p>
+		<p class="small">Fecha de última actualización: 2019-12-29</p>
+	</footer>
+
+	<script src="js/site.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Añadir un rectángulo | Despliega tu mapa</title>
+		<link rel="shortcut icon" href="../images/desploy-your-map.svg" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/prism.css">	
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+		<script src="../js/prism.js"></script>
+		<style>
+		#map {
+			width: 960px;
+			height: 500px;
+		}
+		body {
+			padding: 0 25px 25px 25px;
+			font-size: 18px;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Añadir un rectángulo</h1>
+
+		<div id="map"></div>
+
+		<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;title&gt;Añadir un rectángulo&lt;/title&gt;
+
+&lt;!-- Se referencia la hoja de estilos de JavaScript --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.css&quot; /&gt;
+
+&lt;!-- Se referencia el archivo JavaScript de Leaflet --&gt;
+&lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Se establecen los estilos de ancho y alto del contenedor del mapa --&gt;
+&lt;style&gt;
+#map {
+	width: 960px;
+	height:500px;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+	&lt;!-- Se crea el elemento contenedor del mapa --&gt;
+	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+	// Se crea un objeto mapa, se le asigna al elemento contenedor &#39;map&#39; y se fijan su punto central y nivel de zum iniciales
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	// Se añaden al objeto mapa las teselas de mapa a partir de OpenStreetMap y la información correspondiente de atribución 
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	// Se crea una variable para definir los límites del rectángulo
+	var bounds = [[36.725, -4.425], [36.720, -4.415]];
+
+	// Se crea y añade el rectángulo al mapa definiendo algunos estilos básicos del mismo
+	L.rectangle(bounds, {color: "purple", weight: 2}).addTo(map);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+	<div class="nav">
+	<hr/>
+	<p align="right"><a href="../index.html#add-a-rectangle">Volver al tutorial</a></p>
+	</div>
+
+	<script>
+		var map = L.map('map').setView([36.722, -4.420], 15);
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: 'Datos \u00a9 <a href="http://www.openstreetmap.org/copyright">' + 'Colaboradores de OpenStreetMap </a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>) | Teselas <a href="https://github.com/gravitystorm/openstreetmap-carto">OSM Carto</a> \u00a9 Randy Allan y otros colaboradores (<a href="https://creativecommons.org/licenses/by-sa/2.0/deed.es" target="blanck">CC BY-SA 2.0</a>)'
+		}).addTo(map);
+
+		var bounds = [[36.725, -4.425], [36.720, -4.415]];
+
+		L.rectangle(bounds, {color: "purple", weight: 2}).addTo(map);
+
+	</script>
+
+	</body>
+</html>
