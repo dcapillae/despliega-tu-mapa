@@ -1,11 +1,11 @@
-# Desploy your map
+# Deploy your map
 
-*Desploy your map* (in English; *Despliega tu mapa*, in Spanish) is a basic Leaflet tutorial for beginners. This is a web page which shows how to desploy a custom web map using only HTML, CSS, and the [Leaflet JavaScript](https://leafletjs.com/) library by means of examples.
+*Deploy your map* (in English; *Despliega tu mapa*, in Spanish) is a basic Leaflet tutorial for beginners. This is a web page which shows how to desploy a custom web map using only HTML, CSS, and the [Leaflet JavaScript](https://leafletjs.com/) library by means of examples.
 
 ## Contents
 
-- Desploy a basic map (published)
-- Desploy a multilayer basic map (published)
+- Deploy a basic map (published)
+- Deploy a multilayer basic map (published)
 - Add a standard marker (published)
 - Add a custom marker (published)
 - Add a standard pop-up (published)
@@ -21,4 +21,4 @@ Source code available under the terms of the [GNU General Public License, versio
 
 ## Demo
 
-An online demo is available at [dcapillae.github.io/desploy-your-map](https://dcapillae.github.io/desploy-your-map).
+An online demo is available at [dcapillae.github.io/deploy-your-map](https://dcapillae.github.io/deploy-your-map).
