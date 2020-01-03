@@ -5,7 +5,7 @@
 <head>
 
 	<title>Despliega tu mapa</title>
-	<link rel="shortcut icon" href="images/desploy-your-map.svg" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/deploy-your-map.svg" type="image/x-icon" />
 	<link rel="stylesheet" href="css/site.css" />
 	<link rel="stylesheet" href="css/prism.css">	
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
@@ -26,8 +26,8 @@
 
 	<nav>
 	<p class="small">
-	<a href="#desploy-a-basic-map">Desplegar un mapa básico</a> |
-	<a href="#desploy-a-multilayer-basic-map">Desplegar un mapa básico multicapa</a> |
+	<a href="#deploy-a-basic-map">Desplegar un mapa básico</a> |
+	<a href="#deploy-a-multilayer-basic-map">Desplegar un mapa básico multicapa</a> |
 	<a href="#add-a-standard-marker">Añadir un marcador estándar</a> | 
 	<a href="#add-a-custom-marker">Añadir un marcador personalizado</a> | 
 	<a href="#add-a-standard-popup">Añadir una ventana emergente estándar</a> | 
@@ -39,13 +39,13 @@
 		<p>Tutorial dirigido a personas sin experiencia en programación que desean hacer uso de la <a href="http://leafletjs.com" target="blanck">biblioteca JavaScript de Leaflet</a> para desplegar sus propios mapas.</p>
 		<p>Para seguir el tutorial solo necesitarás un ordenador, un navegador web y un editor de texto simple. Usaremos los lenguajes de programación <a href="https://es.wikipedia.org/wiki/HTML" target="blanck">HTML</a>, <a href="https://es.wikipedia.org/wiki/CSS" target="blanck">CSS</a> y <a href="https://es.wikipedia.org/wiki/JavaScript" target="blanck">JavaScript</a> (JavaScript de Leaflet).</p>
 		<p>Los contenidos se estructuran en base a una serie de ejemplos prácticos que proporcionan todo el código necesario. Incluyen además unas explicaciones mínimas sobre cada nuevo fragmento de código introducido respecto a ejemplos anteriores, por lo que no deberías tener especiales dificultades para poder seguirlos, reproducirlos o adaptarlos a tus necesidades.</p>
-		<p>Los ejemplos propuestos podrán ampliarse o modificarse eventualmente en el futuro. Está previsto incluir al menos un par de ejemplos más sobre cómo crear capas que muestren datos vectoriales o como añadir capas de datos al mapa a partir de archivos externos. Consulta el <a href="https://github.com/dcapillae/desploy-your-map" target="blanck">repositorio del tutorial en GitHub</a> para más detalles.</p>
+		<p>Los ejemplos propuestos podrán ampliarse o modificarse eventualmente en el futuro. Está previsto incluir al menos un par de ejemplos más sobre cómo crear capas que muestren datos vectoriales o como añadir capas de datos al mapa a partir de archivos externos. Consulta el <a href="https://github.com/dcapillae/deploy-your-map" target="blanck">repositorio del tutorial en GitHub</a> para más detalles.</p>
 	</div>
 
-	<div class="section" id="desploy-a-basic-map">
+	<div class="section" id="deploy-a-basic-map">
 		<h2>Desplegar un mapa básico</h2>
 		<p>Este primer ejemplo muestra cómo desplegar un mapa básico como el que se muestra a continuación.</p>
-		<p class="small" align="right"><em><a href="examples/desploy-a-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></a></em></p>
+		<p class="small" align="right"><em><a href="examples/deploy-a-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></a></em></p>
 		<div id="basic_map" class="map"></div>
 
 		<p>Para desplegar un mapa como éste, vamos a necesitar lo siguiente:</li>
@@ -180,10 +180,10 @@ height: 500px;
 		<p>Comprueba que tu código esté bien escrito, guarda el documento HTML y ábrelo con un navegador web. Deberías poder ver un mapa centrado en la ciudad de Málaga. Deslízate por él y prueba a ampliar o reducir la vista. ¡Enhorabuena! Acabas de desplegar tu primer mapa web interactivo usando la biblioteca JavaScript de Leaflet.</p>
 	</div>
 
-	<div class="section" id="desploy-a-multilayer-basic-map">
+	<div class="section" id="deploy-a-multilayer-basic-map">
 		<h2>Desplegar un mapa básico multicapa</h2>
-		<p>Este ejemplo muestra cómo desplegar un <a href="#desploy-a-basic-map">mapa básico</a> multicapa. Un mapa básico multicapa permite seleccionar de forma interactiva el juego de teselas que deseamos mostrar en cada momento a partir de las capas de teselas disponibles.</p>
-		<p class="small" align="right"><em><a href="examples/desploy-a-multilayer-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+		<p>Este ejemplo muestra cómo desplegar un <a href="#deploy-a-basic-map">mapa básico</a> multicapa. Un mapa básico multicapa permite seleccionar de forma interactiva el juego de teselas que deseamos mostrar en cada momento a partir de las capas de teselas disponibles.</p>
+		<p class="small" align="right"><em><a href="examples/deploy-a-multilayer-basic-map.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		
 		<div id="mlb_map" class="map"></div>
 		
@@ -228,7 +228,7 @@ height: 500px;
 	
 	<div class="section" id="add-a-standard-marker">
 		<h2>Añadir un marcador estándar</h2>
-		<p>Este ejemplo añade un marcador estándar a nuestro <a href="#desploy-a-basic-map">mapa básico</a>.</p>
+		<p>Este ejemplo añade un marcador estándar a nuestro <a href="#deploy-a-basic-map">mapa básico</a>.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-standard-marker.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		<div id="sm_map" class="map"></div>
 		<pre><code class="language-markup">
@@ -250,7 +250,7 @@ height: 500px;
 
 	<div class="section" id="add-a-custom-marker">
 		<h2>Añadir un marcador personalizado</h2>
-		<p>Este ejemplo añade un marcador personalizado al <a href="#desploy-a-basic-map">mapa básico</a>. El marcador personalizado será un icono de nuestra elección.</p>
+		<p>Este ejemplo añade un marcador personalizado al <a href="#deploy-a-basic-map">mapa básico</a>. El marcador personalizado será un icono de nuestra elección.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-custom-marker.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="cm_map" class="map"></div>
@@ -284,7 +284,7 @@ height: 500px;
 
 	<div class="section" id="add-a-standard-popup">
 		<h2>Añadir una ventana emergente estándar</h2>
-		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> una ventana emergente estándar vinculada a un marcador personalizado. La ventana aparece al hacer clic sobre el marcador.</p>
+		<p>Este ejemplo añade al <a href="#deploy-a-basic-map">mapa básico</a> una ventana emergente estándar vinculada a un marcador personalizado. La ventana aparece al hacer clic sobre el marcador.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-standard-popup.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="sp_map" class="map"></div>
@@ -333,7 +333,7 @@ height: 500px;
 
 	<div class="section" id="add-a-custom-popup">
 		<h2>Añadir una ventana emergente personalizada</h2>
-		<p>Este ejemplo añade al contenido HTML junto con algunos estilos adicionales a una ventana emergente vinculada a un marcador personalizado sobre un <a href="#desploy-a-basic-map">mapa básico</a>. La ventana aparece al hacer clic sobre el marcador.</p>
+		<p>Este ejemplo añade al contenido HTML junto con algunos estilos adicionales a una ventana emergente vinculada a un marcador personalizado sobre un <a href="#deploy-a-basic-map">mapa básico</a>. La ventana aparece al hacer clic sobre el marcador.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-custom-popup.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="cp_map" class="map"></div>
@@ -388,11 +388,11 @@ height: 500px;
 
 	<div class="section" id="add-geometric-shapes">
 		<h2>Añadir formas geométricas</h2>
-		<p>Los siguientes ejemplos muestran como añadir algunas formas geométricas al <a href="#desploy-a-basic-map">mapa básico</a>. Aprenderemos a añadir un <a href="#add-a-circle">círculo</a>, un <a href="#add-a-rectangle">rectángulo</a>, un <a href="#add-a-polygon">polígono</a> y una <a href="#add-a-polyline">polilínea</a>.</p>
+		<p>Los siguientes ejemplos muestran como añadir algunas formas geométricas al <a href="#deploy-a-basic-map">mapa básico</a>. Aprenderemos a añadir un <a href="#add-a-circle">círculo</a>, un <a href="#add-a-rectangle">rectángulo</a>, un <a href="#add-a-polygon">polígono</a> y una <a href="#add-a-polyline">polilínea</a>.</p>
 
 		<div class="section" id="add-a-circle">
 		<h3>Añadir un círculo</h3>
-		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un círculo a partir de su centro y su radio.</p>
+		<p>Este ejemplo añade al <a href="#deploy-a-basic-map">mapa básico</a> un círculo a partir de su centro y su radio.</p>
 
 		<p class="small" align="right"><em><a href="examples/add-a-circle.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		
@@ -416,7 +416,7 @@ height: 500px;
 
 		<div class="section" id="add-a-rectangle">
 		<h3>Añadir un rectángulo</h3>
-		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un rectángulo a partir de dos de sus vértices.</p>
+		<p>Este ejemplo añade al <a href="#deploy-a-basic-map">mapa básico</a> un rectángulo a partir de dos de sus vértices.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-rectangle.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="rectangle_map" class="map"></div>
@@ -442,7 +442,7 @@ height: 500px;
 
 		<div class="section" id="add-a-polygon">
 		<h3>Añadir un polígono</h3>
-		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> un polígno a partir de la posición de sus vértices.</p>
+		<p>Este ejemplo añade al <a href="#deploy-a-basic-map">mapa básico</a> un polígno a partir de la posición de sus vértices.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-polygon.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="polygon_map" class="map"></div>
@@ -467,7 +467,7 @@ height: 500px;
 
 		<div class="section" id="add-a-polyline">
 		<h3>Añadir una polilínea</h3>
-		<p>Este ejemplo añade al <a href="#desploy-a-basic-map">mapa básico</a> una polilínea a partir de los puntos que definen su trazado.</p>
+		<p>Este ejemplo añade al <a href="#deploy-a-basic-map">mapa básico</a> una polilínea a partir de los puntos que definen su trazado.</p>
 		<p class="small" align="right"><em><a href="examples/add-a-polyline.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 
 		<div id="polyline_map" class="map"></div>
