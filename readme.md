@@ -1,6 +1,6 @@
 # Deploy your map
 
-*Deploy your map* (in English; *Despliega tu mapa*, in Spanish) is a basic Leaflet tutorial for beginners. This is a web page which shows how to desploy a custom web map using only HTML, CSS, and the [Leaflet JavaScript](https://leafletjs.com/) library by means of examples.
+*Deploy your map* (in English; *Despliega tu mapa*, in Spanish) is a basic Leaflet tutorial for beginners. This is a web page which shows how to deploy a custom web map using only HTML, CSS, and the [Leaflet JavaScript](https://leafletjs.com/) library by means of examples.
 
 ## Contents
 
