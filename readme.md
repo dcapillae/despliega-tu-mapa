@@ -1,24 +1,24 @@
-# Deploy your map
+# Despliega tu mapa
 
-*Deploy your map* (in English; *Despliega tu mapa*, in Spanish) is a basic Leaflet tutorial for beginners. This is a web page which shows how to deploy a custom web map using only HTML, CSS, and the [Leaflet JavaScript](https://leafletjs.com/) library by means of examples.
+*Despliega tu mapa* es un tutorial básico de Leaflet para principantes. Se trata de una página web que muestra a través de ejemplos sencillos cómo desplegar un mapa web personalizado usando solo los lenguajes de programación HTML, CSS y la biblioteca [JavaScript de Leaflet](https://leafletjs.com/).
 
-## Contents
+## Contenidos
 
-- Deploy a basic map (published)
-- Deploy a multilayer basic map (published)
-- Add a standard marker (published)
-- Add a custom marker (published)
-- Add a standard pop-up (published)
-- Add a custom pop-up (published)
-- Add geometric shapes (published)
-- Add a data layer (not yet published)
-- Add an data layer from an external file (not yet published)
-- Modify map properties (not yet published)
+- Despliega un mapa básico (publicado)
+- Depliega un mapa básico multicapa (publicado)
+- Añadir un marcador estándar (publicado)
+- Añadir un marcador personalizado (publicado)
+- Añadir una ventana emergente estándar (publicado)
+- Añadir una ventana emergente personalizada (publicado)
+- Añadir formas geométricas (publicado)
+- Añadir una capa de datos (no publicado)
+- Añadir una capa de datos a partir de un archivo externo (no publicado)
+- Modificar las propiedades del mapa (no publicado)
  
-## License
+## Licencia
 
-Source code available under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
+Código fuente disponible bajo términos de [Licencia Pública General GNU, versión 3](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
 
-## Demo
+## Demostración
 
-An online demo is available at [dcapillae.github.io/deploy-your-map](https://dcapillae.github.io/deploy-your-map).
+Hay disponible una demostración en línea en [dcapillae.github.io/despliega-tu-mapa](https://dcapillae.github.io/despliega-tu-mapa).
