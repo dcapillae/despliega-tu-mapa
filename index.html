@@ -32,7 +32,8 @@
 	<a href="#add-a-custom-marker">Añadir un marcador personalizado</a> | 
 	<a href="#add-a-standard-popup">Añadir una ventana emergente estándar</a> | 
 	<a href="#add-a-custom-popup">Añadir una ventana emergente personalizada</a> |
-	<a href="#add-geometric-shapes">Añadir formas geométricas</a>
+	<a href="#add-geometric-shapes">Añadir formas geométricas</a> |
+	<a href="#add-a-data-layer">Añadir una capa de datos</a>	
 	</nav>
 
 	<div class="section" id="intro">
@@ -41,6 +42,8 @@
 		<p>Los contenidos se estructuran en base a una serie de ejemplos prácticos que proporcionan todo el código necesario. Incluyen además unas explicaciones mínimas sobre cada nuevo fragmento de código introducido respecto a ejemplos anteriores, por lo que no deberías tener especiales dificultades para poder seguirlos, reproducirlos o adaptarlos a tus necesidades.</p>
 		<p>Los ejemplos propuestos podrán ampliarse o modificarse eventualmente en el futuro. Está previsto incluir al menos un par de ejemplos más sobre cómo crear capas que muestren datos vectoriales o cómo añadir capas de datos al mapa a partir de archivos externos. Consulta el <a href="https://github.com/dcapillae/deploy-your-map" target="blanck">repositorio del tutorial en GitHub</a> para más detalles.</p>
 	</div>
+
+<!--Desplegar un mapa básico-->
 
 	<div class="section" id="deploy-a-basic-map">
 		<h2>Desplegar un mapa básico</h2>
@@ -179,7 +182,9 @@ height: 500px;
 </code></pre>
 		<p>Comprueba que tu código esté bien escrito, guarda el documento HTML y ábrelo con un navegador web. Deberías poder ver un mapa centrado en la ciudad de Málaga. Deslízate por él y prueba a ampliar o reducir la vista. ¡Enhorabuena! Acabas de desplegar tu primer mapa web interactivo usando la biblioteca JavaScript de Leaflet.</p>
 	</div>
-
+	
+<!--Desplegar un mapa básico multicapa-->	
+	
 	<div class="section" id="deploy-a-multilayer-basic-map">
 		<h2>Desplegar un mapa básico multicapa</h2>
 		<p>Este ejemplo muestra cómo desplegar un <a href="#deploy-a-basic-map">mapa básico</a> multicapa. Un mapa básico multicapa permite seleccionar de forma interactiva el juego de teselas que deseamos mostrar en cada momento a partir de las capas de teselas disponibles.</p>
@@ -226,6 +231,8 @@ height: 500px;
 		<p>Por último, se crea un control de capas mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#control-layers-l-control-layers" target="blanck">L.control.layers</a>, tomando como opción la variable 'baseLayers', y se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
 	</div>
 	
+<!--Añadir un marcador estándar-->
+
 	<div class="section" id="add-a-standard-marker">
 		<h2>Añadir un marcador estándar</h2>
 		<p>Este ejemplo añade un marcador estándar a nuestro <a href="#deploy-a-basic-map">mapa básico</a>.</p>
@@ -247,6 +254,8 @@ height: 500px;
 		<p>El código crea una variable 'marker' a la que asigna un objeto marcador mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#marker" target="blanck">L.marker()</a>, que toma como valores las coordenadas geográficas del punto. El marcador se añade al mapa con el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
 		<p>Ten en cuenta que puedes añadir uno o más marcadores al mapa siguiendo este mismo procedimiento. Prueba a añadir un segundo marcador creando una segunda variable 'marker2', por ejemplo, y sitúanlo en otra posición del mapa para ver el resultado.</p>
 	</div>
+
+<!--Añadir un marcador personalizado-->
 
 	<div class="section" id="add-a-custom-marker">
 		<h2>Añadir un marcador personalizado</h2>
@@ -281,6 +290,8 @@ height: 500px;
 		</ul>
 		<p>La variable ‘photoIcon’ se emplea luego en la opción ‘icon’ de la función <a href="https://leafletjs.com/reference-1.6.0.html#marker" target="blanck">L.marker()</a> para añadir un marcador con nuestro icono personalizado al mapa.</p>
 		</div>
+
+<!--Añadir una ventana emergente estándar-->
 
 	<div class="section" id="add-a-standard-popup">
 		<h2>Añadir una ventana emergente estándar</h2>
@@ -330,6 +341,9 @@ height: 500px;
 
 &lt;/script&gt;
 </code></pre>		
+</div>
+
+<!--Añadir una ventana emergente personalizada-->
 
 	<div class="section" id="add-a-custom-popup">
 		<h2>Añadir una ventana emergente personalizada</h2>
@@ -385,6 +399,8 @@ height: 500px;
 		<p>Ten en cuenta que el ancho máximo predeterminado de una ventana emergente es de 300 píxeles. Si el contenido de tu ventana emergente desborda ese ancho, asegúrate de asignarle un valor adecuado cambiando la opción 'maxWidth' para adaptar el ancho al contenido.</p>
 		<p>Finalmente, el código emplea el método <a href="https://leafletjs.com/reference-1.6.0.html#marker-bindpopup" target="blanck">bindPopup</a> para vincular la ventana emergente al marcador, tomando como argumentos el contenido HTML y las opciones antes definidas. También las variables creadas previamente se consignan según este método.</p>
 	</div>
+	
+<!--Añadir formas geométricas-->
 
 	<div class="section" id="add-geometric-shapes">
 		<h2>Añadir formas geométricas</h2>
@@ -489,6 +505,138 @@ height: 500px;
 </code></pre>
 		<p>El código define una variable 'track' con los puntos que determinan el trazado de la polilínea. Esta variable se utiliza después en la función <a href="https://leafletjs.com/reference-1.6.0.html#polyline" target="blanck">L.polyline()</a> para crear la polilínea, ajustando además otras opciones de estilo, como el color de la misma o su opacidad. La polilínea se añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p> 
 		</div>
+	
+<!--Añadir una capa de datos-->
+
+	<div class="section" id="add-a-data-layer">
+		<h2>Añadir una capa de datos</h2>
+		<p>Este ejemplo despliega un <a href="#deploy-a-basic-map">mapa básico</a> con una capa de datos GeoJSON codificados como una variable.</p>
+		<p class="small" align="right"><em><a href="examples/add-a-data-layer.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
+		<div id="dl_map" class="map"></div>
+		<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;title&gt;Añadir una capa de datos&lt;/title&gt;
+
+&lt;!-- Se referencia la hoja de estilos de JavaScript --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.css&quot; /&gt;
+
+&lt;!-- Se referencia el archivo JavaScript de Leaflet --&gt;
+&lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Se establecen los estilos de ancho y alto del contenedor del mapa --&gt;
+&lt;style&gt;
+#map {
+	width: 960px;
+	height:500px;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+	&lt;!-- Se crea el elemento contenedor del mapa --&gt;
+	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+	// Se crea un objeto mapa, se le asigna al elemento contenedor &#39;map&#39; y se fijan su punto central y nivel de zum iniciales
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	// Se añaden al objeto mapa las teselas de mapa a partir de OpenStreetMap y la información correspondiente de atribución 
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	// Se define la variable 'historic_features' que contiene los datos GeoJSON
+	var historic_features = {
+    	"type": "FeatureCollection",
+    	"features": [{
+			"type": "Feature",
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [[
+					[-4.42428,36.71802],
+					[-4.42352,36.71829],
+					[-4.42388,36.71878],
+					[-4.42461,36.71845]
+					]]
+			},
+			"properties": {
+					"Nombre": "Mercado de Atarazanas",
+					"Descripción": "Mercado municipal central"
+			}
+    	},{
+        	"type": "Feature",
+        	"geometry": {
+            	"type": "Point", 
+            	"coordinates": [
+                	-4.41942,
+                	36.72007
+            	]
+        	},
+        	"properties":{
+            	"Nombre": "Catedral de Málaga",
+            	"Descripción": "Principal templo cristiano de la ciudad"
+        	}
+		},{
+			"type": "Feature",
+			"geometry": {
+					"type": "LineString",
+					"coordinates": [
+						[-4.42515, 36.72056],
+						[-4.42506, 36.72081],
+						[-4.42512, 36.72144],
+						[-4.42409, 36.72291],
+						[-4.42345, 36.72343],
+						[-4.42076, 36.72437]
+						]
+			},
+			"properties": {
+				"Nombre": "Calle Carretería",
+				"Descripción": "Calle del Centro Histórico"
+			}
+    	},{
+        	"type": "Feature",
+        	"geometry": {
+            	"type": "Point",
+            	"coordinates": [
+                	-4.41569,
+                	36.72132
+            	]
+        	},
+        	"properties": {
+            	"Nombre": "Alcazaba",
+            	"Descripción": "Fortificación palaciega medieval"
+        	}
+    	}]
+	};
+
+	// Se añade la capa de datos GeoJSON con una opción para que muestre la propiedad "Nombre" de cada característica en una ventana emergente
+	L.geoJson(historic_features, {
+		onEachFeature: function(feature,layer) {
+		layer.bindPopup(feature.properties.Nombre);
+	}
+	}).addTo(map)
+	
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+</code></pre>
+		<p>El código define una variable 'historic_features' que contiene el conjunto de datos GeoJSON. La capa de datos se crea a través de una instancia de la clase <a href="https://leafletjs.com/reference-1.7.1.html#geojson" target="blanck">L.geoJson()</a>, que toma la variable 'historic_features' como parámetro y la añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
+		<p>La opción 'onEachFeature' de la capa de datos es opcional. Se usa para enlazar una ventana emergente a cada característica para que muestre el valor de una propiedad, en el ejemplo, la propiedad 'Nombre'. Se puede seleccionar cualquiera de las propiedades de una característica incluida en el conjunto de datos mediante 'feature.properties.<em>nombre-de-la-propiedad</em>'.</p>
+		<p>Aunque es habitual que un archivo GeoJSON contenga solo un tipo de elemento geográfico (puntos, líneas o polígonos), esto no es un requisito. Se pueden introducir datos GeoJSON con múltiples geometrías y datos descriptivos asociados a ellas en el código fuente.</p>
+		<p>Para mostrar datos con diferentes geometrías, será necesario especificar el tipo de geometría y las coordenadas apropiadas de cada elemento. Una cadena lineal debe incluir al menos dos puntos. Los polígonos no necesitan cerrarse sobre sí mismos, es decir, no es necesario incluir las coordenadas del punto inicial al final de la lista de coordenadas.</p>
+	</div>
+
 	<div class="nav">
 	<p align="right"><a href="#">Volver al principio</a></p>
 	</div>
@@ -496,8 +644,9 @@ height: 500px;
 	<footer>
 		<hr/>
 		<p class="small">Fecha de primera publicación: 2019-12-29</p>
-		<p class="small">Fecha de última actualización: 2019-12-29</p>
+		<p class="small">Fecha de última actualización: 2021-02-21</p>
 	</footer>
+	</div>
 
 	<script src="js/site.js"></script>
 

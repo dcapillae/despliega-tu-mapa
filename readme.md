@@ -11,7 +11,7 @@
 - Añadir una ventana emergente estándar (publicado)
 - Añadir una ventana emergente personalizada (publicado)
 - Añadir formas geométricas (publicado)
-- Añadir una capa de datos (no publicado)
+- Añadir una capa de datos (publicado)
 - Añadir una capa de datos a partir de un archivo externo (no publicado)
 - Modificar las propiedades del mapa (no publicado)
  

@@ -143,3 +143,80 @@
 		var toUnion = [[36.7205, -4.4130],[36.7165, -4.4260],[36.7218, -4.4250],[36.7230, -4.4240],[36.7240, -4.4220],[36.7250, -4.4220],[36.7270, -4.4240],[36.7270, -4.4250],[36.7270, -4.4270],[36.7280, -4.4300]];
     
 	L.polyline(toUnion,{color:'red',opacity:1}).addTo(polyline_map);
+
+	  	//map with a data layer
+		var dl_map = L.map('dl_map').setView([36.722, -4.420], 15);
+		
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: 'Datos \u00a9 <a href="http://www.openstreetmap.org/copyright">' + 'Colaboradores de OpenStreetMap </a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>) | Teselas <a href="https://github.com/gravitystorm/openstreetmap-carto">OSM Carto</a> \u00a9 Randy Allan y otros colaboradores (<a href="https://creativecommons.org/licenses/by-sa/2.0/deed.es" target="blanck">CC BY-SA 2.0</a>)'
+			}).addTo(dl_map);
+
+		var historic_features = {
+    		"type": "FeatureCollection",
+    		"features": [{
+				"type": "Feature",
+				"geometry": {
+					"type": "Polygon",
+					"coordinates": [[
+						[-4.42428,36.71802],
+						[-4.42352,36.71829],
+						[-4.42388,36.71878],
+						[-4.42461,36.71845]
+						]]
+				},
+				"properties": {
+						"Nombre": "Mercado de Atarazanas",
+						"Descripción": "Mercado municipal central"
+				}
+    		},{
+        		"type": "Feature",
+        		"geometry": {
+            		"type": "Point", 
+            		"coordinates": [
+                		-4.41942,
+                		36.72007
+            		]
+        		},
+        		"properties":{
+            		"Nombre": "Catedral de Málaga",
+            		"Descripción": "Principal templo cristiano de la ciudad"
+        		}
+			},{
+				"type": "Feature",
+				"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[-4.42515, 36.72056],
+							[-4.42506, 36.72081],
+							[-4.42512, 36.72144],
+							[-4.42409, 36.72291],
+							[-4.42345, 36.72343],
+							[-4.42076, 36.72437]
+							]
+				},
+				"properties": {
+					"Nombre": "Calle Carretería",
+					"Descripción": "Calle del Centro Histórico"
+				}
+    		},{
+        		"type": "Feature",
+        		"geometry": {
+            		"type": "Point",
+            		"coordinates": [
+                		-4.41569,
+                		36.72132
+            		]
+        		},
+        		"properties": {
+            		"Nombre": "Alcazaba",
+            		"Descripción": "Fortificación palaciega medieval"
+        		}
+    		}]
+		};
+
+
+   	L.geoJson(historic_features, {
+			onEachFeature: function(feature,layer) {
+			layer.bindPopup(feature.properties.Nombre);
+		}
+		}).addTo(dl_map)
