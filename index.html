@@ -514,46 +514,15 @@ height: 500px;
 		<p class="small" align="right"><em><a href="examples/add-a-data-layer.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		<div id="dl_map" class="map"></div>
 		<pre><code class="language-markup">
-&lt;!DOCTYPE html&gt;
-
-&lt;html&gt;
-
-&lt;head&gt;
-
-&lt;title&gt;Añadir una capa de datos&lt;/title&gt;
-
-&lt;!-- Se referencia la hoja de estilos de JavaScript --&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.css&quot; /&gt;
-
-&lt;!-- Se referencia el archivo JavaScript de Leaflet --&gt;
-&lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-
-&lt;!-- Se establecen los estilos de ancho y alto del contenedor del mapa --&gt;
-&lt;style&gt;
-#map {
-	width: 960px;
-	height:500px;
-}
-&lt;/style&gt;
-
-&lt;/head&gt;
-
-&lt;body&gt;
-
-	&lt;!-- Se crea el elemento contenedor del mapa --&gt;
-	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
 
 &lt;script&gt;
 
-	// Se crea un objeto mapa, se le asigna al elemento contenedor &#39;map&#39; y se fijan su punto central y nivel de zum iniciales
 	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
 
-	// Se añaden al objeto mapa las teselas de mapa a partir de OpenStreetMap y la información correspondiente de atribución 
 	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
 	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
 	}).addTo(map);
 
-	// Se define la variable 'historic_features' que contiene los datos GeoJSON
 	var historic_features = {
     	"type": "FeatureCollection",
     	"features": [{
@@ -617,7 +586,6 @@ height: 500px;
     	}]
 	};
 
-	// Se añade la capa de datos GeoJSON con una opción para que muestre la propiedad "Nombre" de cada característica en una ventana emergente
 	L.geoJson(historic_features, {
 		onEachFeature: function(feature,layer) {
 		layer.bindPopup(feature.properties.Nombre);
@@ -625,10 +593,6 @@ height: 500px;
 	}).addTo(map)
 	
 &lt;/script&gt;
-
-&lt;/body&gt;
-
-&lt;/html&gt;
 
 </code></pre>
 		<p>El código define una variable 'historic_features' que contiene el conjunto de datos GeoJSON. La capa de datos se crea a través de una instancia de la clase <a href="https://leafletjs.com/reference-1.7.1.html#geojson" target="blanck">L.geoJson()</a>, que toma la variable 'historic_features' como parámetro y la añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>.</p>
