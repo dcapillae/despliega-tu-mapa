@@ -635,7 +635,7 @@ height: 500px;
 
 &lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/leaflet.markercluster.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bicycle-parking.geojson&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bicycle-parkings.geojson&quot;&gt;&lt;/script&gt;
 
 &lt;style&gt;
 #map {
@@ -690,7 +690,7 @@ height: 500px;
 		<p>A continuación, referenciamos el archivo de datos en nuestro documento HTML introduciendo el siguiente código en la sección &lt;head&gt; del documento:</p>
 
 		<pre><code class="language-markup">
-&lt;script src=&quot;bicycle-parking.geojson&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bicycle-parkings.geojson&quot;&gt;&lt;/script&gt;
 		</code></pre>
 
 		<p>Este archivo de datos podría añadirse al mapa directamente como una capa de datos a través de una instancia de la clase <a href="https://leafletjs.com/reference-1.7.1.html#geojson" target="blanck">L.geoJson()</a>, que toma la variable 'data' como parámetro y la añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>. El resultado puede verse <a href="examples/add-a-data-layer-from-an-external-file-without-customizing.html" id="add-a-data-layer-from-an-external-file-without-customizing">aquí</a>.</p>
@@ -703,14 +703,14 @@ height: 500px;
 		
 		<p>Para usar la funcionalidad de agrupación de marcadores, tendremos que incluir en nuestro documentos HTML las referencias a las hojas de estilos y el archivo JavaScript de la extensión. Estos archivos se puede descargar y usar localmente, aunque en este ejemplo emplearemos los archivos alojados en el sitio web oficial de la extensión.</p>
 		
-		<p>Para referenciar estos archivos, introduce el siguiente código en la sección &lt;head&gt; del documento HTML (nótese que el código también hace referencia al archivo de datos 'bicycle-parking.geojson', que vamos a necesitar):</p>
+		<p>Para referenciar estos archivos, introduce el siguiente código en la sección &lt;head&gt; del documento HTML (nótese que el código también hace referencia al archivo de datos 'bicycle-parkings.geojson', que vamos a necesitar):</p>
 
 		<pre><code class="language-markup">
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.css&quot; /&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.Default.css&quot; /&gt;
 
 &lt;script src=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/leaflet.markercluster.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bicycle-parking.geojson&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bicycle-parkings.geojson&quot;&gt;&lt;/script&gt;
 		</code></pre>
 		
 		<p>A continuación, introduce el siguiente código JavaScript entre las etiquetas &lt;script&gt; del documento HTML:</p>
