@@ -621,42 +621,18 @@ height: 500px;
 		<div id="pl_map" class="map"></div>
 		<pre><code class="language-markup">
 
-&lt;!DOCTYPE html&gt;
-
-&lt;html&gt;
-
 &lt;head&gt;
 
-&lt;title&gt;Añadir una capa de datos a partir de una archivo externo&lt;/title&gt;
-
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.css&quot; /&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.css&quot; /&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.Default.css&quot; /&gt;
-
-&lt;script src=&quot;https://unpkg.com/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/leaflet.markercluster.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;bicycle-parkings.geojson&quot;&gt;&lt;/script&gt;
-
-&lt;style&gt;
-#map {
-	width: 960px;
-	height:500px;
-}
-&lt;/style&gt;
 
 &lt;/head&gt;
 
 &lt;body&gt;
 
-	&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
-
 &lt;script&gt;
-
-	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
-
-	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
-	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
-	}).addTo(map);
 
 		var parkingIcon = L.icon({
 			iconUrl: &#39;bicycle-parking.svg&#39;,
@@ -678,7 +654,6 @@ height: 500px;
 
 &lt;/body&gt;
 
-&lt;/html&gt;
 </code></pre>
 
 		<p>Los datos se encuentran inicialmente en forma de un archivo GeoJSON de nombre '<a href="data/bicycle-parkings.geojson" target="blanck">bicycle-parkings.geojson</a>'. El archivo contiene información relativa a la ubicación de los estacionamientos de bicicleta disponibles en Málaga.</p>
