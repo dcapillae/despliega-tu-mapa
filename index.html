@@ -648,6 +648,9 @@ height: 500px;
 		<p class="small" align="right"><em><a href="examples/add-a-data-layer-from-an-external-file.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		<div id="pl_map" class="map"></div>
 
+		<div class="section">
+		<h3>Método directo para añadir los datos al mapa</h3>
+
 		<p>Los datos se encuentran inicialmente en forma de un archivo GeoJSON de nombre '<a href="data/bicycle-parkings.geojson" target="blanck">bicycle-parkings.geojson</a>'. El archivo contiene información relativa a la ubicación de los estacionamientos de bicicleta disponibles en Málaga.</p>
 		
 		<p>Para importar estos datos al mapa, tendremos que codificarlos como una variable (en nuestro caso, la variable 'data'). Para hacer esto, abrimos el archivo GeoJSON con un editor de texto simple e incluimos lo siguiente como primera línea del archivo:</a>
@@ -662,9 +665,27 @@ height: 500px;
 
 		<p>Este archivo podría añadirse al mapa directamente como una capa de datos a través de una instancia de la clase <a href="https://leafletjs.com/reference-1.7.1.html#geojson" target="blanck">L.geoJson()</a>, que toma la variable 'data' como parámetro y la añade al mapa usando el método <a href="https://leafletjs.com/reference-1.6.0.html#control-addto" target="blanck">addTo()</a>. El resultado puede verse <a href="examples/add-a-data-layer-from-an-external-file-without-customizing.html" id="add-a-data-layer-from-an-external-file-without-customizing">aquí</a>.</p>
 
-		<p>No obstante, en este ejemplo no añadiremos los datos directamente al mapa. El inconveniente de cargar así los datos es que, cuando nuestra capa de datos incluye gran número de puntos o marcadores, estos se superpongan unos con otros. La usabilidad del mapa en ese caso se verá notablemente afectada, ya que cuando hay muchos puntos juntos, resulta casi imposible saber en qué marcador particular estamos haciendo clic.</p>
+		<pre><code class="language-markup">
+&lt;script&gt;
+
+	var map = L.map(&#39;map&#39;).setView([36.722, -4.420], 15);
+
+	L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+	attribution: &#39;Datos &amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot; target=&quot;blanck&quot;&gt;Colaboradores de OpenStreetMap&lt;/a&gt; (&lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;blanck&quot;&gt;ODbL&lt;/a&gt;) | Teselas &lt;a href=&quot;https://github.com/gravitystorm/openstreetmap-carto&quot; target=&quot;blanck&quot;&gt;OSM Carto&lt;/a&gt; &amp;copy; Randy Allan y otros colaboradores (&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/deed.es&quot; target=&quot;blanck&quot;&gt;CC BY-SA 2.0&lt;/a&gt;)&#39;
+	}).addTo(map);
+
+	L.geoJson(data).addTo(map);
 		
-		<p>Para resolver este problema, emplearemos la agrupación de marcadores, un mecanismo mediante el cual los puntos cercanos se agrupan bajo un único marcador que incluye además un indicador con la cantidad de puntos agrupados. Esta funcionalidad no está incluida en la biblioteca de Leaflet de forma predeterminada, debemos incorporarla mediante una extensión externa.</p>
+&lt;/script&gt;
+		</code></pre>
+
+		<p>No obstante, en este ejemplo no añadiremos los datos directamente al mapa. El inconveniente de cargar así los datos es que, cuando nuestra capa de datos incluye gran número de puntos o marcadores, estos se superpongan unos con otros. La usabilidad del mapa en ese caso se verá notablemente afectada, ya que cuando hay muchos puntos juntos, resulta casi imposible saber en qué marcador particular estamos haciendo clic.</p>
+		</div>
+
+		<div class="section">
+		<h3>Agrupación de marcadores</h3>
+		
+		<p>Para resolver el problema de la superposición, emplearemos la agrupación de marcadores, un mecanismo mediante el cual los puntos cercanos se agrupan bajo un único marcador que incluye además un indicador con la cantidad de puntos agrupados. Esta funcionalidad no está incluida en la biblioteca de Leaflet de forma predeterminada, debemos incorporarla mediante una extensión externa.</p>
 		
 		<p>En este ejemplo emplearemos la extensión <a href="https://github.com/Leaflet/Leaflet.markercluster" target="blanck">Leaflet.markercluster</a>. Esta extensión se encarga de averiguar las agrupaciones de marcadores, mostrarlas y separarlas a medida que se hace zum sobre el mapa (este ejemplo muestra solo una implementación sencilla de esta extensión; hay muchas opciones que puedes explorar).</p>
 		
@@ -717,7 +738,7 @@ height: 500px;
 		<p>Antes de devolver el marcador como resultado de resolver la función <a href="https://leafletjs.com/reference-1.7.1.html#geojson-pointtolayer" target="_blank">pointToLayer</a>, el código crea una ventana emergente usando el método <a href="https://leafletjs.com/reference-1.6.0.html#marker-bindpopup" target="blanck">bindPopup()</a>. Tan solo es necesario indicar el contenido que debe aparecer en la ventana emergente en forma de código HTML. En nuestro ejemplo, la ventana mostrará información relativa a la capacidad de cada estacionamiento de bicicletas al hacer clic sobre un marcador. Este dato corresponde con la propiedad 'capacity' incluida en nuestro archivo de datos GeoJSON. Se puede seleccionar cualquiera de las propiedades de una característica incluida en el conjunto de datos mediante 'feature.properties.<em>nombre-de-la-propiedad</em>'.</p>
 		 
 		<p>Finalmente, el código crea una capa de marcadores agrupados con <a href="https://github.com/Leaflet/Leaflet.markercluster" target="blanck">Leaflet.markercluster</a>, una función que forma parte de la extensión, asignándole la variable 'clusters'. Esta capa es una agrupación de marcadores a la que podemos añadir marcadores individuales que luego serán agrupados. El parámetro 'showCoverageOnHover' sirve para indicar si queremos que al pasar el ratón por encima de un grupo de marcadores se muestre la extensión real que ocupan sus marcadores. Su valor predeterminado es 'true'. Por último, la capa 'clusters' se añade al mapa con <a href="https://leafletjs.com/reference-1.7.1.html#map-addlayer" target="_blank">addLayer</a>.</p>
-
+		</div>
 	</div>
 
 	<div class="nav">
@@ -727,7 +748,7 @@ height: 500px;
 	<footer>
 		<hr/>
 		<p class="small">Fecha de primera publicación: 2019-12-29</p>
-		<p class="small">Fecha de última actualización: 2021-05-16</p>
+		<p class="small">Fecha de última actualización: 2021-05-17</p>
 	</footer>
 	</div>
 
