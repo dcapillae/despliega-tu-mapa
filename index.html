@@ -647,43 +647,6 @@ height: 500px;
 
 		<p class="small" align="right"><em><a href="examples/add-a-data-layer-from-an-external-file.html">Ver este ejemplo y su código fuente en una ventana independiente</a></em></p>
 		<div id="pl_map" class="map"></div>
-		<pre><code class="language-markup">
-
-&lt;head&gt;
-
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.css&quot; /&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/MarkerCluster.Default.css&quot; /&gt;
-
-&lt;script src=&quot;https://unpkg.com/leaflet.markercluster@1.4.0/dist/leaflet.markercluster.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bicycle-parkings.geojson&quot;&gt;&lt;/script&gt;
-
-&lt;/head&gt;
-
-&lt;body&gt;
-
-&lt;script&gt;
-
-		var parkingIcon = L.icon({
-			iconUrl: &#39;bicycle-parking.svg&#39;,
-			iconSize: [20,20]
-			});;
-
-		var parkings = L.geoJson(data, {
-			pointToLayer: function(feature,latlng){
-			var marker = L.marker(latlng,{icon: parkingIcon});
-			marker.bindPopup(&quot;Capacidad: &quot; + feature.properties.capacity);
-			return marker;
-			}});
-
-		var clusters = L.markerClusterGroup({ showCoverageOnHover: false });
-		clusters.addLayer(parkings);
-		map.addLayer(clusters); 
-		
-&lt;/script&gt;
-
-&lt;/body&gt;
-
-</code></pre>
 
 		<p>Los datos se encuentran inicialmente en forma de un archivo GeoJSON de nombre '<a href="data/bicycle-parkings.geojson" target="blanck">bicycle-parkings.geojson</a>'. El archivo contiene información relativa a la ubicación de los estacionamientos de bicicleta disponibles en Málaga.</p>
 		
@@ -747,7 +710,7 @@ height: 500px;
 &lt;/script&gt;
 </code></pre>
 
-		<p>En primer lugar, el código define un icono personalizado para los marcadores identificado con la variable 'parkingIcon'. Para más detalles sobre cómo establecer un icono personalizado, consulta el ejemplo <a href="#add-a-custom-marker">Añadir un marcador personalizado</a>.</p>
+		<p>En primer lugar, después de inicializar el mapa, el código define un icono personalizado para los marcadores identificado con la variable 'parkingIcon'. Para más detalles sobre cómo establecer un icono personalizado, consulta el ejemplo <a href="#add-a-custom-marker">Añadir un marcador personalizado</a>.</p>
 		 
 		<p>Luego, define una variable 'parkings' a la que le asigna la capa de datos GeoJSON. La capa de datos se crea a través de una instancia de la clase <a href="https://leafletjs.com/reference-1.7.1.html#geojson" target="blanck">L.geoJson()</a>. La función <a href="https://leafletjs.com/reference-1.7.1.html#geojson-pointtolayer" target="_blank">pointToLayer</a> de Leaflet es usa aquí para determinar cómo convertir una característica de punto a una capa del mapa. Esta función siempre acepta dos argumentos: la característica GeoJSON y un objeto <a href="https://leafletjs.com/reference-1.7.1.html#latlng" target="_blank">LatLng</a> que representa su ubicación (no es necesario indicarla, Leaflet la calculará automáticamente). La función devuelve una variable 'marker' a la que asigna un objeto marcador mediante la función <a href="https://leafletjs.com/reference-1.6.0.html#marker" target="blanck">L.marker()</a>, que toma como valores las coordenadas geográficas del punto y usa como imagen del marcador nuestro icono personalizado.</p>
 
